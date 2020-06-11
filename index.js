@@ -6,12 +6,15 @@ const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakf
 
 /* Task 1a: write a function to return more menu items with the same format as the items above. */
 
-function createMenuItem(name, cost, category){
-    /* Code here */
-}
+// function createMenuItem(name, cost, category){
+//     return {name, cost, category}
+// }
+
 
 /* Task 1b: use your function to create 3 more menu items. You may add any items to the menu that you'd like */
-
+// console.log(createMenuItem("Pizza", 8, "Dinner"))
+// console.log(createMenuItem("Sandwhich", 4, "Lunch"))
+// console.log(createMenuItem("Tacos", 8, "Lunch"))
 
 
 /* Task 2: You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to your burger object that automatically calculates price given a string as a parameter. 
@@ -23,6 +26,15 @@ Your method should accept:
 and should return a number. 
 
 For example, burger.discount("teacher") would return 13.5 and burger.discount("public") would return 16.2*/
+burger.discount = function discount(str){
+    if(str.toLowerCase() === 'teacher' || 'student'){
+    return burger.price - burger.price * .25;
+  } else {
+    return burger.price - burger.price * .10;
+  }
+}
+
+console.log(burger.discount("public"))
 
 
 
@@ -39,30 +51,37 @@ const reviews = [{name: "Daniela", rating: 5, feedback:"Beautiful atmosphere and
 ]
 
 /* Task 4: Console.log just Julius' feedback */
-
+// console.log(reviews[5].feedback)
 
 /* Task 5: Add a new rating with your (fictitious) opinions of the restaurant in the same format as the reviews above. */
+let newArr = [];
+function addOpinion(newArr, name, rating, feedback){
+  newArr.push({name, rating, feedback})
+  return newArr
+}
+console.log(addOpinion(reviews, 'Jorge', 4.4, 'Highly reccoment, delicious flavor in every bite!'));
 
+// Task 6: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
+function changeFeedback(array, index, feedback){
+  array[index].feedback = feedback;
+  return array
+}
+console.log(changeFeedback(reviews, 7, "this place is chill with really cool people, great for getting work done on weekdays"))
+//   Task 7: Write a function to return a review based on the index of the review in the array.
 
-/* Task 6: Add the following feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
+//  Your function should take two arguments:
 
-/*  Task 7: Write a function to return a review based on the index of the review in the array.
+// (1) an array which holds all of the reviews
+// (2) a number which is the desired index in the array.
 
- Your function should take two arguments:
-
-(1) an array which holds all of the reviews
-(2) a number which is the desired index in the array.
-
-and should return a string in the format `{name} gave the restaurant a {rating}, and their feedback was: {feedback}`
- * 
- * For example, if getReviewByIndex is invoked with reviews and the number 0
- * it will return `Daniela gave the restaurant a 5 star review and their feedback was: Beautiful atmosphere and wonderful vegan options!`
-*/
+// and should return a string in the format `{name} gave the restaurant a {rating}, and their feedback was: {feedback}`
+//  * 
+//  * For example, if getReviewByIndex is invoked with reviews and the number 0
+//  * it will return `Daniela gave the restaurant a 5 star review and their feedback was: Beautiful atmosphere and wonderful vegan options`!
 function getReviewByIndex(reviews, index) {
-    /* code here */
+  const ooga = reviews[index];
+  return `${ooga.name} gave the restaurant a ${ooga.rating}, and their feedback was: ${ooga.feedback}`;
   }
-  
-
 /* Task 8: Write a function to get information about the most recent review called `getLastReview`
 
 getLastReview should accept:
@@ -72,11 +91,11 @@ and should return a string in the format `name} gave the restaurant a {rating}, 
 
 For example, if getLastReview is invoked passing the reviews array it will return `Reyna gave the restaurant a 3.5 star review and their feedback was: "this place is chill with really cool people, great for getting work done on weekdays"`.
 */
-function getLastReview(/* code here */) {
-    /* code here */
+function getLastReview(arr) {
+  const booga = arr[arr.length - 1]
+  return `${booga.name} gave the restaurant a ${booga.rating}, and their feedback was: ${booga.feedback}`;
   } 
-
-
+console.log(getLastReview(reviews))
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
 
 /** STRETCH 1: Write a function called `getReviewByRating` that returns an array containing all reviews in a certain range. Your function should accept: 
@@ -91,10 +110,16 @@ function getLastReview(/* code here */) {
     {name:"Lauren", rating: 4, feedback: "Absolutely love that they have karaoke Fridays! Food and drink selection is okay."}]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+ function getReviewByRating(arr, rating) {
+   const newArr = [];
+    for(let i = 0; i < arr.length; i++){
+      if(Math.floor(arr[i].rating) === rating){
+        newArr.push(arr[i])
+         }
   }
-
+  return newArr
+ }
+ console.log(getReviewByRating(reviews, 4))
   
 /** STRETCH 2: Write a function called 'getLongestReview' that returns an array containing all reviews longer than 15 words. 
   
